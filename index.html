@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mail-bot</title>
+<style>
+  :root { --fg: #1d1d1f; --muted: #555; --bg: #fff; --line: #e5e5e5; }
+  @media (prefers-color-scheme: dark) { :root { --fg: #eee; --muted: #aaa; --bg: #161616; --line: #333; } }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { margin-bottom: 4px; } h2 { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .muted { color: var(--muted); } code { font-size: 0.95em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>mail-bot</h1>
+  <p class="muted">A private Telegram bot. Last updated: 2026-10-07.</p>
+
+  <p>mail-bot relays the newest e-mail from a few pre-configured senders in its owner's Gmail
+  inbox to a small whitelist of Telegram users. From each matching message it extracts only
+  a configured fragment (for example a one-time sign-in code) and sends that fragment,
+  together with the time the message was received, to the user who pressed the button.</p>
+  <p>It is operated by a single individual for personal use and is not offered to the public.</p>
+
+  <h2 id="privacy">Privacy policy</h2>
+
+  <h3>Google user data accessed</h3>
+  <p>The bot uses the Gmail API with the read-only scope
+  <code>https://www.googleapis.com/auth/gmail.readonly</code>, granted by the owner of the
+  mailbox. It searches the inbox for messages from the configured senders and reads those
+  messages to extract the configured fragment. It cannot send, modify, label or delete mail.</p>
+
+  <h3>How the data is used</h3>
+  <ul>
+    <li>Message content is processed in memory only, at the moment a whitelisted user requests it.</li>
+    <li>Only the extracted fragment and the received-at time are delivered, via Telegram,
+        to that whitelisted user.</li>
+    <li>E-mail content is <strong>not stored</strong>: no message bodies, subjects or addresses
+        are written to disk or to the database.</li>
+    <li>Data is not sold, not used for advertising, not used to train AI or ML models,
+        and not shared with anyone other than the requesting whitelisted user.</li>
+  </ul>
+
+  <h3>Data stored</h3>
+  <p>To manage the whitelist the bot stores, for each Telegram user it admits: Telegram user
+  id, username and display name, who invited them and when; and single-use invite codes with
+  their expiry. This data is deleted when the administrator removes the user from the whitelist.
+  The OAuth refresh token is kept only in the server's configuration.</p>
+
+  <h3>Limited Use</h3>
+  <p>mail-bot's use and transfer of information received from Google APIs adheres to the
+  <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services
+  User Data Policy</a>, including the Limited Use requirements.</p>
+
+  <h3>Revoking access</h3>
+  <p>The mailbox owner can revoke the bot's access to Gmail at any time at
+  <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
+  Telegram users can ask the administrator to remove them from the whitelist.</p>
+
+  <h3>Contact</h3>
+  <p><a href="mailto:nickita.borovkov@gmail.com">nickita.borovkov@gmail.com</a></p>
+</main>
+</body>
+</html>
